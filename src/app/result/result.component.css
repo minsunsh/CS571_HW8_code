@@ -1,0 +1,33 @@
+@font-face {
+    font-family: georgia;
+    src: url("../../assets/fonts/georgia.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: georgia;
+    src: url("../../assets/fonts/georgia-italic.ttf");
+    font-style: italic;
+}
+
+.custom-rounded {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 15px;
+    overflow: hidden;
+  } 
+  
+.table{
+    margin-top: 100px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.event:hover{
+    cursor: pointer;
+}
+
+.table-responsive {
+    border-radius: 0.5rem
+}

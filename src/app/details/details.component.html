@@ -1,0 +1,283 @@
+<div class="col-md-7 mx-auto col-12 px-1 biggest-cont">
+    <div class="container-xl col-lg-5 w-100 custom-container mx-auto" style="padding: 0px">
+      <div class="container-sm custom-cont-bar px-4"><i class="fa fa-chevron-left" style="color: grey; font-size: 15px;"></i>&nbsp;<span class="back_button" (click)="onBackButtonClick()">Back</span></div>
+
+      <div class="detail_event_title w-100 h-100">
+        <span class="detail_event_title_text w-100 my-3 px-3">{{eventDetailData.name}}&nbsp;</span>
+        <span class="white-circle" (click)="addFavorites(eventDetailData)">
+          <span class="material-icons" *ngIf="!checkIfIdExists(eventDetailData.id)" style="margin: 5px;"> favorite_border </span>
+          <span class="material-icons" *ngIf="checkIfIdExists(eventDetailData.id)" style="margin: 5px; color:red"> favorite </span>
+        </span>        
+      </div>
+        <mat-tab-group class="custom-tab-group" mat-align-tabs="center" (selectedTabChange)="onTabChanged($event)" [(selectedIndex)]="selectedTabIndex">
+            <mat-tab label="Events" class="mat-tab-label">
+              <div class="text_area">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-5 mx-auto my-auto">
+                        <div class="my-2">
+                          <div *ngIf="eventDetailData.date" class="detail_event_subtitle">Date</div>
+                          <span *ngIf="eventDetailData.date" class="detail_event_element">{{eventDetailData.date}}&nbsp;</span>
+                          <span *ngIf="eventDetailData.time" class="detail_event_element">{{eventDetailData.time}}</span>
+
+                          <div *ngIf="eventDetailData.aot" class="detail_event_subtitle">Artist/Team</div>
+                          <div *ngIf="eventDetailData.aot" class="detail_event_element">{{eventDetailData.aot}}</div>
+                    
+                          
+                            <div *ngIf="eventDetailData.venue" class="detail_event_subtitle">Venue</div>
+                            <div *ngIf="eventDetailData.venue" class="detail_event_element">{{eventDetailData.venue}}</div>
+                            
+                            <div *ngIf="eventDetailData.genre" class="detail_event_subtitle">Genres</div>
+                            <div *ngIf="eventDetailData.genre" class="detail_event_element">{{eventDetailData.genre}}</div>
+                            
+                            <div *ngIf="eventDetailData.priceMin" class="detail_event_subtitle">Price Ranges</div>
+                            <div *ngIf="eventDetailData.priceMin"class="detail_event_element">{{eventDetailData.priceMin}}&nbsp;-&nbsp;{{eventDetailData.priceMax}}</div>
+                
+                            <div *ngIf="eventDetailData.status" class="detail_event_subtitle">Ticket Status</div>
+                            <div *ngIf="eventDetailData.status" class="{{eventDetailData.status_class}}">{{eventDetailData.status}}</div>
+                
+                            <div *ngIf="eventDetailData.buyurl" class="detail_event_subtitle">Buy Ticket At:</div>
+                            <div *ngIf="eventDetailData.buyurl" class="detail_event_element_blue"><a href="{{eventDetailData.buyurl}}" class="detail_event_element_blue" target="_blank">Ticketmaster</a></div>
+                          </div>
+                      </div>
+                      <div class="col-md-5 mx-auto my-auto">
+                        <div class="my-2">
+                          <img *ngIf="eventDetailData.seatmap" src="{{eventDetailData.seatmap}}" class="seatmap_img" alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col my-4" style="text-align: center;">
+                          <span class="share_on">Share on:&nbsp;&nbsp;</span>
+                            <i class="fa-brands fa-twitter" (click)="ShareTT(eventDetailData.name, eventDetailData.buyurl)" style="font-size: 35px; color:mediumturquoise;"></i>&nbsp;&nbsp;
+                            <i class="fa-brands fa-facebook-square" (click)="ShareFB(eventDetailData.buyurl)" style="font-size: 35px; color:rgb(30, 65, 146);"></i>
+                        </div>
+                    </div>
+                    </div>
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Artist/Teams">
+                <div class="artist_area px-4">
+                  <div *ngIf="artistData && artistData.length > 0">
+                    <mdb-carousel [isControls]="true" [animation]="'slide'" [interval]="0">  
+                      <ng-container *ngFor="let item of artistData | keyvalue">
+                          <mdb-carousel-item>
+                            <div class="px-5 my-3">
+
+
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-md-4 d-flex flex-column">
+                                    <div class="artist-container h-80 d-flex align-items-end justify-content-center">
+                                      <img src="{{setArtistDataAttr(item.value, 'photo')}}" class="artist-image" alt="">
+                                    </div>
+                                    <div class="h-50 d-flex align-items-start justify-content-center">
+                                      <div class="artist_title">{{setArtistDataAttr(item.value, 'name')}}</div>
+                                    </div>
+                                  </div>
+                              
+                                  <div class="col-md-3 d-flex flex-column">
+                                    <div class="h-50 d-flex align-items-end justify-content-center mb-2">
+                                      <div class="detail_event_subtitle">Popularity</div>
+                                    </div>
+                                    <div class="h-50 d-flex align-items-start justify-content-center">
+                                      <div class="spinner-container mt-2">
+                                        <mat-progress-spinner [diameter]="30" color="warn" [value]="setArtistDataAttr(item.value, 'popularity')"></mat-progress-spinner>
+                                        <span class="spinner-text">{{setArtistDataAttr(item.value, 'popularity')}}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                              
+                                  <div class="col-md-2 d-flex flex-column">
+                                    <div class="h-50 d-flex align-items-end justify-content-center mb-2">
+                                      <div class="detail_event_subtitle">Followers</div>
+                                    </div>
+                                    <div class="h-50 d-flex align-items-start justify-content-center pt-2">
+                                   
+                                        <div class="followers_text">{{ setArtistDataAttr(item.value, 'followers') | number }}</div>
+                                  
+                                    </div>
+                                  </div>
+                              
+                                  <div class="col-md-3 d-flex flex-column">
+                                    <div class="h-50 d-flex align-items-end justify-content-center mb-2">
+                                      <div class="detail_event_subtitle">Spotify Link</div>
+                                    </div>
+                                    <div class="h-50 d-flex align-items-start justify-content-center pt-2">
+                                        <i class="fa-brands fa-spotify" (click)="openSpotify(setArtistDataAttr(item.value, 'link'))" style="font-size: 35px; color:rgb(58, 126, 41);"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              
+                              <div class="container mb-3">
+                                <div class="row my-3">
+                                  <div class="col my-2 w-100" style="text-align: left;">
+                                    <span class="album_featuring" style="text-align: left;">Album Featuring {{setArtistDataAttr(item.value, 'name')}}</span>
+                                  </div>
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                  <div class="col-md-4 my-2">
+                                    <img class="album-image mx-auto d-block" src="{{setArtistDataAttr(item.value, 'album1')}}" alt="">
+                                  </div>
+                                  <div class="col-md-4 my-2">
+                                    <img class="album-image mx-auto d-block" src="{{setArtistDataAttr(item.value, 'album2')}}" alt="">
+                                  </div>
+                                  <div class="col-md-4 my-2">
+                                    <img class="album-image mx-auto d-block" src="{{setArtistDataAttr(item.value, 'album3')}}" alt="">
+                                  </div>
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </mdb-carousel-item>
+                        </ng-container>
+                  </mdb-carousel>
+                  </div>
+                  <ng-container *ngIf="isEmptyObject(artistData)">
+                    <table class="table table-light custom-rounded table-striped table-borderless">
+                      <tbody>
+                        <tr class="px-3">
+                          <th style="color: red; text-align: center;">No music related artist details to show</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </ng-container>
+                  
+                </div>
+                <ng-container *ngIf="isMultiObject(artistData)">
+              </ng-container>
+            </mat-tab>
+
+            <mat-tab label="Venue">
+              <div class="text_area px-4">
+              <ng-container *ngIf="HaveData(venueDetailData)">
+                  <div class="container my-3">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="venue_detail_box_left w-100 px-2">
+                          <div *ngIf="venueDetailData.name" class="detail_event_subtitle">Name</div>
+                          <div *ngIf="venueDetailData.name" class="detail_event_element">{{venueDetailData.name}}</div>
+                          
+                          <div *ngIf="venueDetailData.addr" class="detail_event_subtitle">Address</div>
+                          <div *ngIf="venueDetailData.addr" class="detail_event_element">{{venueDetailData.addr}}</div>
+
+                          <div *ngIf="venueDetailData.phone" class="detail_event_subtitle">Phone Number</div>
+                          <div *ngIf="venueDetailData.phone" class="detail_event_element">{{venueDetailData.phone}}</div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="venue_detail_box_right w-100 px-2">
+                          <div *ngIf="venueDetailData.openhour" class="detail_event_subtitle">Open Hours</div>
+                          <ng-container *ngIf="venueDetailData.openhour">
+                            <ng-container *ngIf=!showFullContent.openHours>
+                              <div class="detail_event_element two-line-text">
+                                {{venueDetailData.openhour}}
+                              </div>
+                              <a (click)="toggleContent('openHours')" class="show-more-link">
+                                <span class="show-more-text">Show More</span><span class="material-icons show-more-icon">expand_more</span>
+                              </a>
+                            </ng-container>
+
+                            <ng-container *ngIf=showFullContent.openHours>
+                              <div class="detail_event_element">
+                                {{venueDetailData.openhour}}
+                              </div>
+                              <a (click)="toggleContent('openHours')" class="show-more-link">
+                                <span class="show-more-text">Show Less</span><span class="material-icons show-more-icon">expand_less</span>
+                              </a>
+                            </ng-container>
+                          </ng-container>
+                              
+                          <div *ngIf="venueDetailData.gr" class="detail_event_subtitle">General Rule</div>                   
+                          <ng-container *ngIf="venueDetailData.gr">
+                            <ng-container *ngIf=!showFullContent.generalRule>
+                              <div class="detail_event_element two-line-text">
+                                {{venueDetailData.gr}}
+                              </div>
+                              <a (click)="toggleContent('generalRule')" class="show-more-link">
+                                <span class="show-more-text">Show More</span><span class="material-icons show-more-icon">expand_more</span>
+                              </a>
+                            </ng-container>
+
+                            <ng-container *ngIf=showFullContent.generalRule>
+                              <div class="detail_event_element">
+                                {{venueDetailData.gr}}
+                              </div>
+                              <a (click)="toggleContent('generalRule')" class="show-more-link">
+                                <span class="show-more-text">Show Less</span><span class="material-icons show-more-icon">expand_less</span>
+                              </a>
+                            </ng-container>
+                          </ng-container>
+
+                          <div *ngIf="venueDetailData.cr" class="detail_event_subtitle">Child Rule</div>
+                          <ng-container *ngIf="venueDetailData.cr">
+                            <ng-container *ngIf=!showFullContent.childRule>
+                              <div class="detail_event_element two-line-text">
+                                {{venueDetailData.cr}}
+                              </div>
+                              <a (click)="toggleContent('childRule')" class="show-more-link">
+                                <span class="show-more-text">Show More</span><span class="material-icons show-more-icon">expand_more</span>
+                              </a>
+                            </ng-container>
+
+                            <ng-container *ngIf=showFullContent.childRule>
+                              <div class="detail_event_element">
+                                {{venueDetailData.cr}}
+                              </div>
+                              <a (click)="toggleContent('childRule')" class="show-more-link">
+                                <span class="show-more-text">Show Less</span><span class="material-icons show-more-icon">expand_less</span>
+                              </a>
+                            </ng-container>
+                          </ng-container>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-5">
+                        <button class="btn btn-danger" (click)="clickedModal(venueDetailData.long, venueDetailData.lat)">Show venue on Google map</button>
+                      </div>
+                    </div>
+                </div>
+                </ng-container>
+
+                <ng-container *ngIf="isEmptyObject(venueDetailData)">
+                  <table class="table table-light custom-rounded table-striped table-borderless">
+                    <tbody>
+                        <tr>
+                          <th style="color: red; text-align: center; vertical-align: middle;">No venue details to show</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                </ng-container>
+              </div>
+            </mat-tab>
+
+        </mat-tab-group>
+        
+        <!-- Modal -->
+        <div [ngClass]="modal ? 'modal fade show d-block' : 'modal fade'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Event Venue</h2>
+              </div>
+              <div class="modal-body">
+                <div class="map-container">
+                  <google-map [options]="mapOptions" class="my-google-map" height="400px" width="100%">
+                    <map-marker [position]="marker.position"></map-marker>
+                  </google-map>
+                </div>
+              </div>
+              <div class="close_button">
+                <button type="button" class="btn btn-dark" (click)="clickedModalClose()">Close</button>
+              </div>
+             </div>
+          </div>
+        </div>
+</div>
+</div>

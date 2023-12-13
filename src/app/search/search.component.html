@@ -1,0 +1,109 @@
+<ul class="nav nav-pills mb-3 justify-content-end" id="pills-tab" role="tablist">
+    <li class="nav-item-selected">
+      <a class="nav-link" id="pills-home-tab" data-toggle="pill" routerLink="/search" role="tab" aria-controls="pills-home" aria-selected="true">Search</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" routerLink="/favorites" role="tab" aria-controls="pills-profile" aria-selected="false">Favorites</a>
+    </li>
+</ul>
+<div class="mx-2">
+
+  <div class="col-md-5 card mx-auto">
+      <br>
+      <div class="title">Events Search</div>
+      <hr>
+      <div [formGroup]="searchForm">
+        <div class="container">
+        <div class="row p-1">
+          <div class="col-12 mb-3 px-3">
+            <div class="form-group">
+                <label for="KeywordInput" class="form-label">Keyword<span class="redstar">&nbsp;*</span></label>
+                <div class="position-relative">
+                  <input type="text" (keyup)="keywordOnKeyUp()" [(ngModel)]="selectedKeyword" [matAutocomplete]="auto" class="form-control" id="KeywordInput" formControlName="keywordInput">
+                  
+                  <ng-container *ngIf="isKeywordEmpty">
+                    <span class="tooltip_fadein col-sm-5 my-2 py-1" id="tooltip_fadein"><span class="exc">!</span>Please fill out this field.</span>
+              
+                  </ng-container>
+                </div>
+
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()">
+                  <mat-option *ngIf="isLoading" class="is-loading"><div class="spinner-border text-secondary spinner-border-sm" role="status">
+                  </div></mat-option>
+                  <ng-container *ngIf="!isLoading">
+                    <mat-option *ngFor="let keyword of keywordSuggestions | keyvalue" [value]="setJsonDataAttr(keyword.value, 'name')">
+                      <span>{{setJsonDataAttr(keyword.value, 'name')}}</span>
+                    </mat-option>
+                  </ng-container>
+                </mat-autocomplete>
+        
+            </div>
+          </div>
+        </div>
+        <div class="row p-1">
+          <div class="col-12 col-md-6 mb-3 px-3">
+              <div class="form-group">
+                  <label for="exampleFormControlInput1" class="form-label">Distance</label>
+                  <input type="number" formControlName="distanceInput" class="form-control" value="10">
+              </div>
+          </div>
+          <div class="col-9 col-md-5 mb-3 px-3">
+              <div class="form-group">
+                  <label for="exampleFormControlInput1" class="form-label">Category<span class="redstar">&nbsp;*</span></label>
+                  <select class="form-select" formControlName="categoryInput">
+                      <option value="default" selected>Default</option>
+                      <option value="music">Music</option>
+                      <option value="sports">Sports</option>
+                      <option value="arts&theatre">Arts & Theatre</option>
+                      <option value="film">Film</option>
+                      <option value="miscellaneous">Miscellaneous</option>
+                  </select>
+              </div>
+          </div>
+        </div>
+        <div class="row p-1">
+          <div class="col-12 mb-3 px-3">
+            <div class="form-group">
+                <label for="exampleFormControlInput1" class="form-label">Location<span class="redstar">&nbsp;*</span></label>
+                
+                  <input type="text" *ngIf="checkboxForm.value['isChecked']; else elseBlock" class="form-control" id="exampleFormControlInput1" disabled>
+            
+                
+                <ng-template #elseBlock>
+                  <div class="position-relative">
+                    <input type="text" (keyup)="locationOnKeyUp()" class="form-control" id="exampleFormControlInput1" formControlName="locationInput">
+                    <ng-container *ngIf="isLocationEmpty">
+                      <span class="tooltip_fadein col-sm-5 my-2 py-1" id="tooltip_fadein"><span class="exc">!</span>Please fill out this field.</span>
+                    </ng-container>
+                  </div>
+                </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="row p-1">
+          <div class="col mb-3 px-3">
+            <div class="form-check">
+            <div [formGroup]="checkboxForm">
+            <input class="form-check-input" (change)="locationOnKeyUp()" type="checkbox" value="" id="flexCheckDefault" formControlName="isChecked">
+            <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="isChecked" (change)="auto_detect()"> -->
+            <label class="form-check-label" for="flexCheckDefault">Auto-detect your location</label>
+            </div>
+          </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    <br>
+    <div class="buttons">
+      <button type="button" class="btn btn-danger" (click)="submit()">SUBMIT</button> &nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" (click)="clear()">CLEAR</button>
+    </div>
+    <br><br>
+    <!-- <input [(ngModel)]="selectedKeyword" [matAutocomplete]="auto" [formControl]="searchMoviesCtrl"> -->
+
+ </div>
+
+</div>
+
+<app-result *ngIf="showResult && dataReceived" [jsonData]="jsonData" (showDetailsEvent)="toggleDetails($event)"></app-result>
+<app-details *ngIf="showDetails" [eventDetailData]="eventDetailData" [venueDetailData]="venueDetailData" [artistData]="artistData" (goBackEvent)="toggleDetails($event)"></app-details>

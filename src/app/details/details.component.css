@@ -1,0 +1,337 @@
+@font-face {
+    font-family: georgia;
+    src: url("../../assets/fonts/georgia.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: georgia;
+    src: url("../../assets/fonts/georgia-italic.ttf");
+    font-style: italic;
+}
+
+.biggest-cont {
+    padding-bottom: 30px;
+}
+
+.custom-container {
+    background-color: rgb(240, 240, 240, 0.2);
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+    height: auto;
+    padding-bottom: 30px;
+    margin-top: 100px;
+}
+
+.custom-cont-bar {
+    padding-top: 20px;
+    color: white;
+    font-size: 20px;
+    margin-left: 0px;
+}
+
+.back_button {
+    color: white;
+    font-size: 15px;
+    text-decoration: underline;
+}
+.back_button:hover {
+    cursor: pointer;
+}
+
+.title {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.event_detail_box_left {
+    height: auto;
+    text-align: center;
+}
+
+.event_detail_box_right {    
+    height: auto;
+}
+.white-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.white-circle:hover {
+    cursor: pointer;
+}
+
+.detail_event_title {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    height: 30px;
+}
+
+.detail_event_title_text {
+    font-weight: Bold;
+    font-size: 22px;
+    text-align: center;
+    color: rgb(234, 234, 234);
+    margin-bottom: 30px;
+}
+
+.detail_event_subtitle {
+    font-weight: Bold;
+    font-size: 18px;
+    color: rgb(73, 227, 209);
+    padding-top: 15px;
+    padding-bottom: 5px;
+    border: 1px;
+}
+
+.artist_title {
+    font-weight: Bold;
+    font-size: 18px;
+    color: rgb(73, 227, 209);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px;
+}
+
+.detail_event_element {
+    font-weight: normal;
+    font-size: 12px;
+    color: rgb(234, 234, 234);
+    border: 1px;
+}
+
+.detail_event_element_blue {
+    font-weight: normal;
+    font-size: 12px;
+    color: rgb(58, 159, 231);
+    border: 1px;
+}
+
+.detail_event_element_blue:hover {
+    color: rgb(40, 111, 161);
+}
+
+.seatmap_img {
+    width: 90%;
+    height: auto;
+}
+
+
+.status_green {
+    font-size: 12px;
+    color: rgb(234, 234, 234);
+    border-radius: 7px;
+    background-color: green;
+    display: inline-block;
+    padding: 4px;
+}
+
+.status_orange {
+    font-size: 12px;
+    color: rgb(234, 234, 234);
+    border-radius: 7px;
+    background-color: orange;
+    display: inline-block;
+    padding: 4px;
+}
+
+.status_red {
+    font-size: 12px;
+    color: rgb(229, 229, 229);
+    border-radius: 7px;
+    background-color: red;
+    display: inline-block;
+    padding: 4px;
+}
+
+.status_black {
+    font-size: 12px;
+    color: rgb(234, 234, 234);
+    border-radius: 5px;
+    background-color: black;
+    display: inline-block;
+    padding: 4px;
+}
+
+.share_on {
+    color: white;
+    font-size: 15px;
+}
+
+.fa-brands.fa-twitter:hover, .fa-brands.fa-facebook-square:hover, .fa-brands.fa-spotify:hover {
+    cursor: pointer;
+}
+
+.text_area, .artist_area {
+    min-height: 300px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.venue_detail_box_left {
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.venue_detail_box_right {
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.close_button {
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.gm-style {
+    width: 90%;
+    height: auto;
+    margin: 20px;
+}
+
+.modal-title {
+    margin-bottom: 0px;
+}
+
+.map-container {
+    height: 100%; /* Adjust the height according to your preference */
+    width: 100%;
+    /* overflow: hidden; */
+}
+  
+.modal-body {
+    position: relative;
+}
+  
+.my-google-map {
+    height: 90%;
+    width: 90%;
+}
+
+.show-more-text {
+    font-size: 14px;
+}
+
+.show-more-icon {
+  font-size: 16px;
+  vertical-align: middle;
+  color: white;
+}
+
+.album_featuring {
+    font-weight: Bold;
+    font-size: 15px;
+    color: rgb(73, 227, 209);
+    border: 1px;
+    text-align: left;
+}
+
+.followers_text {
+    color: white;
+    font-weight: Bold;
+    font-size: 15px;
+}
+
+.spinner-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+}
+
+mat-progress-spinner {
+    display: inline-block;
+}
+
+.spinner-text {
+    position: absolute;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.artist-container {
+    width: 100%;
+    display: flex;
+    
+}
+
+.artist-image {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    max-width: 130px;
+    max-height: 130px;
+}
+
+.custom-rounded {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 15px;
+    overflow: hidden;
+} 
+
+.album-image {
+    width: 100%;
+    height: auto;
+    /* max-width: 200px;
+    max-height: 200px; */
+}
+
+.sr-only {
+  font-size: 0;
+  color: rgb(99, 165, 144);
+}
+
+.two-line-text {
+    height: 3em; 
+    overflow: hidden;
+    white-space: pre-line;
+}
+
+::ng-deep .mdc-tab__text-label {
+    color: rgb(220, 220, 220)!important;
+}
+  
+  
+/* ::ng-deep .mdc-tab--active .mdc-tab__text-label {
+    color: white!important;
+} */
+
+::ng-deep .carousel-control-next-icon {
+    filter: invert(90%)!important;
+}
+  
+::ng-deep .carousel-control-prev-icon {
+    filter: invert(90%)!important;
+}
+
+::ng-deep .carousel-control-next.ng-star-inserted:hover {
+    cursor: pointer!important;
+}
+
+::ng-deep .carousel-control-prev.ng-star-inserted:hover {
+    cursor: pointer!important;
+}
+
+::ng-deep .mat-mdc-focus-indicator {
+    padding: 0px!important;
+}
+  
+::ng-deep .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab {
+    flex-grow: 0.2!important;
+}

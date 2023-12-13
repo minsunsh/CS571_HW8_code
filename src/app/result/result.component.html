@@ -1,0 +1,36 @@
+<div class="mx-auto mx-1 mx-sm-5">
+<div class="container-xl col-lg-8">
+    <div class="table-responsive">
+        <table *ngIf="jsonData && dataLength(jsonData) > 0" class="table table-dark custom-rounded table-striped table-borderless">
+            <thead>
+            <tr>
+            <th scope="col" class="w-20">Date/Time</th>
+            <th scope="col" class="w-10">Icon</th>
+            <th scope="col" class="w-25">Event</th>
+            <th scope="col" class="w-20">Genre</th>
+            <th scope="col" class="w-25">Venue</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of jsonData | keyvalue: sortKeysNumerically" class="event" (click)="eventDetail(setJsonDataAttr(item.value, 'id'), setJsonDataAttr(item.value, 'venue'), setJsonDataAttr(item.value, 'music'))">
+                    <th class="w-20">{{setJsonDataAttr(item.value, 'date')}}<br>{{setJsonDataAttr(item.value, 'time')}}</th>
+                    <td class="w-10"><img src="{{setJsonDataAttr(item.value, 'icon')}}" style="width: 80px; height: 80px;"></td>
+                    <td class="w-25" >{{setJsonDataAttr(item.value, 'event')}}</td>
+                    <td class="w-20">{{setJsonDataAttr(item.value, 'genre')}}</td>
+                    <td class="w-25">{{setJsonDataAttr(item.value, 'venue')}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    
+    
+    <table *ngIf="jsonData && dataLength(jsonData) == 0" class="table table-light custom-rounded table-striped table-borderless">
+        <thead>
+            <tr>
+            <th style="color: red">No Results Available</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+</div>

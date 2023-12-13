@@ -1,0 +1,76 @@
+@font-face {
+    font-family: georgia;
+    src: url("../../assets/fonts/georgia.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: georgia;
+    src: url("../../assets/fonts/georgia-italic.ttf");
+    font-style: italic;
+}
+
+.nav-item {
+    margin-top: 10px;
+    background-color: transparent;
+    border: 1px;
+    border-style: solid;
+    border-color:transparent;
+    border-radius: 13px; 
+    margin-right: 10px;
+}
+
+.nav-item-selected {
+    margin-top: 10px;
+    background-color: transparent;
+    border: 1px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 13px; 
+}
+
+.nav-link {
+    font-size: 15px;
+    color: white;
+    background-color: transparent;
+    border-color: white;
+    border: 1px;
+}
+
+.nav-pills {
+    margin-right: 20px;
+}
+
+.custom-rounded {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 15px;
+    overflow: hidden;
+}  
+
+.content_title {
+    font-weight: Bold;
+    font-size: 18px;
+    color: rgb(73, 227, 209);
+    padding-top: 15px;
+    padding-bottom: 5px;
+    border: 1px;
+    text-align: center;
+}
+
+.table_titles {
+    text-align: center;
+}
+
+.fa-regular.fa-trash-can:hover {
+    cursor: pointer;
+}
+
+.table_titles, .table_contents:hover{
+    cursor: default;
+}
+
+.table-container {
+    overflow-y: auto; /* create a vertical scrollbar when content overflows */
+  }

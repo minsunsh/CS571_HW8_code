@@ -1,0 +1,54 @@
+<ul class="nav nav-pills mb-3 justify-content-end" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" id="pills-home-tab" data-toggle="pill" routerLink="/search" role="tab" aria-controls="pills-home" aria-selected="true">Search</a>
+    </li>
+    <li class="nav-item-selected">
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" routerLink="/favorites" role="tab" aria-controls="pills-profile" aria-selected="false">Favorites</a>
+    </li>
+</ul>
+
+<ng-container *ngIf="isFavorites()">
+  <div class="table-container">
+  <div class="container-xl col-lg-9 custom-container pb-5 px-2" style="padding: 0px">
+    <div class="content_title mb-4">List of your favorite events</div>
+    <table class="table table-light custom-rounded table-hover">
+      <thead>
+        <tr class="table_titles">
+        <th scope="col" class="w-5" >#</th>
+        <th scope="col" class="w-10">Date</th>
+        <th scope="col" class="w-30">Event</th>
+        <th scope="col" class="w-20">Category</th>
+        <th scope="col" class="w-20">Venue</th>
+        <th scope="col" class="w-5">Favorite</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of getStoredData; let i = index" style="vertical-align: top; text-align: center;" class="table_contents">
+          <th class="table_contents">{{i+1}}</th>
+          <td class="table_contents">{{item.date}}</td>
+          <td class="table_contents">{{item.event}}</td>
+          <td class="table_contents">{{item.genre}}</td>
+          <td class="table_contents">{{item.venue}}</td>
+          <td style="vertical-align: top; text-align: center;"><i class="fa-regular fa-trash-can" (click)="delete(item.key)" style="font-size: 20px;"></i></td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+</div>
+</ng-container>
+
+<ng-container *ngIf="isFavoritesEmpty()">
+<div class="container-md col-lg-7 custom-container py-5" style="padding: 0px">
+  <div class="mx-5">
+    <table class="table table-light custom-rounded table-striped table-borderless">
+      <tbody>
+        <tr>
+
+          <th style="color: red; text-align: center;">No favorite events to show</th>
+
+        </tr>
+      </tbody>
+    </table>
+    </div>
+</div>
+</ng-container>
